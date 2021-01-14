@@ -1,19 +1,32 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './scss/app.scss';
-import Header from './components/Header';
-import Button from './components/Button';
 import App from './App';
-
+import {createStore} from 'redux'
 // import reportWebVitals from './reportWebVitals';
 import {BrowserRouter, Route} from 'react-router-dom'
+import store from'./redux/store'
+import { Provider } from 'react-redux'
 
+// const inc = ()=>{
+//   store.dispatch({type: 'INCREMENT'})
+// }
+// store.subscribe(()=>{
+//   console.log('изменился - ', store.getState())
+// })
 ReactDOM.render(
-  <React.StrictMode>
-    <BrowserRouter>
-    <App/>    
+  // <React.StrictMode>
+    <BrowserRouter >
+     <Provider store={store}> 
+     {/* <Provider/>  */}
+    {/* <button onClick={inc}>
+      +
+    </button> */}
+    <App/>  
+    </Provider>  
     </BrowserRouter>
-  </React.StrictMode>,
+  // </React.StrictMode>,
+  ,
   document.getElementById('root')
 );
 
