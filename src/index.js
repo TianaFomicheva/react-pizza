@@ -8,20 +8,11 @@ import {BrowserRouter, Route} from 'react-router-dom'
 import store from'./redux/store'
 import { Provider } from 'react-redux'
 
-// const inc = ()=>{
-//   store.dispatch({type: 'INCREMENT'})
-// }
-// store.subscribe(()=>{
-//   console.log('изменился - ', store.getState())
-// })
 ReactDOM.render(
   // <React.StrictMode>
     <BrowserRouter >
      <Provider store={store}> 
-     {/* <Provider/>  */}
-    {/* <button onClick={inc}>
-      +
-    </button> */}
+
     <App/>  
     </Provider>  
     </BrowserRouter>

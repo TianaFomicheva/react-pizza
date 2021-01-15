@@ -1,6 +1,6 @@
 import React from 'react'
 
-function SortPopup({items, onClickItem}) {
+const SortPopup = React.memo(function SortPopup({items, onClickItem}) {
   const [activeItem, setActiveItem] = React.useState(0)
   const onSelectItem = (index) =>{
     setActiveItem(index)   
@@ -51,6 +51,8 @@ React.useEffect(() => {
         </div>)}
       </div>
     )
-}
+})
+
+
 
 export default SortPopup
