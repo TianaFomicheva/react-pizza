@@ -2,9 +2,10 @@ import React from 'react'
 import classNames from 'classnames'
 import { types } from '@babel/core'
 import propTypes from 'prop-types'
+import LoadingBlock from './LoadingBlock'
 
 
-function PizzaBlock({name, imageUrl, types,sizes}) {
+function PizzaBlock({name, imageUrl, types,sizes, isLoading}) {
     const availableTypes = ['тонкое', 'традиционное']
     const availableSizes = [26,30,40]
     const [activeType, setActiveType] = React.useState(types[0])
@@ -17,6 +18,7 @@ function PizzaBlock({name, imageUrl, types,sizes}) {
         setActiveSize(index)
         
       }
+
     return (
         <div className="pizza-block">
         <img
@@ -63,7 +65,10 @@ function PizzaBlock({name, imageUrl, types,sizes}) {
 }
 
 PizzaBlock.propTypes = {
-  name: propTypes.string
+  name: propTypes.string,
+}
+
+PizzaBlock.defaultProps = {
 }
 
 export default PizzaBlock

@@ -6,7 +6,7 @@ import {Header} from './components';
 import {Home, Cart} from './pages';
 import {Route} from 'react-router-dom'
 import axios from 'axios'
-import {fetchPizzas, setPizzas} from './redux/actions/pizzas'
+
 import { createStore } from 'redux';
 import {connect} from 'react-redux'
 import store from'./redux/store'
@@ -22,10 +22,7 @@ function App() {
 
  
 
-  React.useEffect(()=>{
-    
-    console.log(dispatch(fetchPizzas()))
-  },[])
+ 
   return (
 
     <div className="wrapper">
