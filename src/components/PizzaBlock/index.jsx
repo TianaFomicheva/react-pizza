@@ -3,13 +3,14 @@ import classNames from 'classnames'
 import { types } from '@babel/core'
 import propTypes from 'prop-types'
 import LoadingBlock from './LoadingBlock'
+import Button from '../Button'
 
 
-function PizzaBlock({name, imageUrl, types,sizes, isLoading}) {
+function PizzaBlock({id, name, imageUrl, types,sizes, price, onClickAddPizza }) {
     const availableTypes = ['тонкое', 'традиционное']
     const availableSizes = [26,30,40]
     const [activeType, setActiveType] = React.useState(types[0])
-    const [activeSize, setActiveSize] = React.useState(sizes[0])
+    const [activeSize, setActiveSize] = React.useState(0)
     const onSelectType = (index) =>{
         setActiveType(index)
         
@@ -18,6 +19,22 @@ function PizzaBlock({name, imageUrl, types,sizes, isLoading}) {
         setActiveSize(index)
         
       }
+
+const onAddPizza = () =>{
+  
+  const obj = {
+    id, 
+    name,
+    imageUrl,
+    price,
+    size: availableSizes[activeSize],
+    type: availableTypes[activeType]
+  }
+  
+  
+  onClickAddPizza(obj)
+}
+
 
     return (
         <div className="pizza-block">
@@ -42,8 +59,8 @@ function PizzaBlock({name, imageUrl, types,sizes, isLoading}) {
           </ul>
         </div>
         <div className="pizza-block__bottom">
-          <div className="pizza-block__price">от 395 ₽</div>
-          <div className="button button--outline button--add">
+          <div className="pizza-block__price">от {price} ₽</div>
+          <Button onClick={onAddPizza} className="button button--add" outline>
             <svg
               width="12"
               height="12"
@@ -58,7 +75,7 @@ function PizzaBlock({name, imageUrl, types,sizes, isLoading}) {
             </svg>
             <span>Добавить</span>
             <i>2</i>
-          </div>
+          </Button>
         </div>
       </div> 
     )
