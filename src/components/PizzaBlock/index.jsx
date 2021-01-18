@@ -6,7 +6,7 @@ import LoadingBlock from './LoadingBlock'
 import Button from '../Button'
 
 
-function PizzaBlock({id, name, imageUrl, types,sizes, price, onClickAddPizza }) {
+function PizzaBlock({id, name, imageUrl, types,sizes, price, onClickAddPizza, addedCount }) {
     const availableTypes = ['тонкое', 'традиционное']
     const availableSizes = [26,30,40]
     const [activeType, setActiveType] = React.useState(types[0])
@@ -74,7 +74,7 @@ const onAddPizza = () =>{
               />
             </svg>
             <span>Добавить</span>
-            <i>2</i>
+            {addedCount &&<i>{addedCount}</i>}
           </Button>
         </div>
       </div> 
