@@ -3,6 +3,7 @@ const initialState ={
     totalPrice: 0,
     totalCount: 0
 }
+const getTotalPrice = (arr) => arr.reduce((sum, obj) => obj.price + sum, 0);
 
   
 const cart = (state = initialState, action)=>{
@@ -12,12 +13,13 @@ const cart = (state = initialState, action)=>{
             const currentPizzaItems = !state.items[action.payload.id]
             ? [action.payload]
             : [...state.items[action.payload.id].items, action.payload];
+            
 
             const newItems = {
                 ...state.items,
                 [action.payload.id]: {
                   items: currentPizzaItems,
-                  
+                  totalPrice: getTotalPrice(currentPizzaItems)
                 },
               };    
                     const pizzasCountItemsLength = Object.values(newItems).map(item=>item['items'].length)
