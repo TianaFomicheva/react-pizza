@@ -1,33 +1,33 @@
 import React from 'react'
 
-const SortPopup = React.memo(function SortPopup({items, activeSortType, onClickSortType}) {
-  // const [activeItem, setActiveItem] = React.useState(0)
-  const onSelectItem = (index) =>{
+const SortPopup = React.memo(function SortPopup({ items, activeSortType, onClickSortType }) {
+  const [visiblePopup, setVisiblePopup] = React.useState(false);
+  const sortRef = React.useRef();
+  // const activeLabel = items.find((obj) => obj.type === activeSortType).name;
+
+  const toggleVisibility = () => {
+    setVisiblePopup(!visiblePopup);
+  };
+
+  const handleOutsideClick = (event) => {
+    const path = event.path || (event.composedPath && event.composedPath());
+    if (!path.includes(sortRef.current)) {
+      setVisiblePopup(false);
+    }
+  };
+
+  const onSelectItem = (index) => {
+    
     if (onClickSortType) {
+      
       onClickSortType(index);
     }
-    setVisiblePopup(false); 
-  }
- const [visiblePopup, setVisiblePopup] = React.useState(false)  
- const toggleVisibility = ()=>{
-   
-    setVisiblePopup(!visiblePopup)
- }
- 
- const sortRef = React.useRef()
- const handleOutsideClick = (event)=>{
-  const path = event.path || (event.composedPath && event.composedPath());
-  if(path.includes(sortRef.current)){
-    setVisiblePopup(false)
-  }
- }
-//  const activeLabel = items.find((obj) => obj.type === activeSortType).name;
+    setVisiblePopup(false);
+  };
 
-React.useEffect(() => {
-   
-    document.body.addEventListener('click', handleOutsideClick)
-
-}, [visiblePopup])
+  React.useEffect(() => {
+    document.body.addEventListener('click', handleOutsideClick);
+  }, []);
     return (
         <div ref={sortRef}className="sort">
         <div className="sort__label">

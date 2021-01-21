@@ -7,8 +7,8 @@ import {useSelector, useDispatch} from 'react-redux'
 import {setCategory, setSortBy} from '../redux/actions/filters'
 
 
-const categoryNames = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые']
-const sortItems = [{name:'популярности', type:'popular', order: 'desc'},{name:'цене', type:'price', order: 'asc'},{name:'палфавиту', type:'name', order: 'asc'}]
+const categoryNames = ['Мясные', 'Вегетерианские', 'Гриль', 'Острые', 'Закрытые']
+const sortItems = [{name:'популярности', type:'rating', order: 'desc'},{name:'цене', type:'price', order: 'asc'},{name:'по алфавиту', type:'name', order: 'asc'}]
 
 function Home() {
   const dispatch = useDispatch()
@@ -41,9 +41,20 @@ function Home() {
         <h2 className="content__title">Все пиццы</h2>
         <div className="content__items">
           
-        {isLoaded ? items.map((obj) => (
-          
-              <PizzaBlock  onClickAddPizza={handleAddPizzaToCart} addedCount={cartItems[obj.id] && cartItems[obj.id].items.length} key={obj.id} {...obj} /> )): Array(12).fill(0) .map((_, index) => <LoadingBlock key={index} />)}
+        {isLoaded && items
+          ? 
+          // console.log(items)
+          items.pizzas.map((obj) => (
+              <PizzaBlock
+                onClickAddPizza={handleAddPizzaToCart}
+                key={obj.id}
+                addedCount={cartItems[obj.id] && cartItems[obj.id].items.length}
+                {...obj}
+              />
+            ))
+          : Array(12)
+              .fill(0)
+              .map((_, index) => <LoadingBlock key={index} />)}
         </div>
       </div>
     )
